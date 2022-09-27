@@ -100,11 +100,15 @@ const BottomBar = () => {
     
     useEffect(() => {
         if (seconds == 0) {
-            navigate("/login");
+            logout();
             return;
         }
         setTimeout(() => {setSeconds(seconds - 1)}, 1000);
     }, [seconds]);
+
+    function logout() {
+        navigate("/login");
+    }
     
     return (
         <BarContainer>
@@ -123,7 +127,7 @@ const BottomBar = () => {
                 <a href="http://google.com" target="_blank">Continuar Navegando</a>
             </LinkBox>
             <LinkBox>
-                <a onClick={() => navigate("/login")}>Logout</a>
+                <a onClick={() => logout()}>Logout</a>
             </LinkBox>
         </BarContainer>
     )

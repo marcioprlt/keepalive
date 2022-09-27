@@ -72,8 +72,9 @@ const Input = styled.input`
     line-height: 20px;
     color: ${secundaria};
 
-    &:not(:placeholder-shown) + ${Icon},
-    &:focus + ${Icon} {
+    &:not(:placeholder-shown) + ${Icon}
+    // &:focus + ${Icon}
+    {
         right: 20px;
     }
 
