@@ -2,31 +2,63 @@ import styled from "styled-components"
 
 import iconUser from "../../../assets/images/icon-user.svg";
 import iconPassword from "../../../assets/images/icon-password.svg";
-import { primaria, secundaria } from "../../../components/variaveis";
+import { primary, secondary } from "../../../components/variables";
 import React, { useState } from "react";
 
 import { NavigateFunction, useNavigate } from "react-router-dom";
+import LogoWhite from "../../../components/LogoWhite";
 
 const Container = styled.div`
     width: 379px;
-    height: 685px;
     margin: auto;
 
     display: flex;
     flex-direction: column;
 
-    color: ${secundaria}
+    color: ${secondary};
+
+    @media (max-width: 1023px) {
+        width: 30%;
+    }
+
+    @media (max-width: 767px) {
+        width: 60%;
+    }
+
+    @media (max-width: 374px) {
+        width: 80%;
+    }
+`;
+
+const StyledLogoWhite = styled(LogoWhite)`
+    display: none;
+    margin-bottom: 32px;
+
+    @media (max-width: 767px) {
+        display: initial;
+        align-self: center;
+        width: 200px;
+    }
+
+    @media (max-width: 374px) {
+        width: 80%;
+    }
 `;
 
 const Ola = styled.p`
     font-size: 60px;
     font-weight: 400;
     line-height: 76px;
+
+    @media (max-width: 374px), (max-height: 767px) {
+        font-size: 40px;
+        line-height: 28px;
+    }
 `;
 
 const Text = styled.p`
     margin-top: 17px;
-    width: 301px;
+    max-width: 301px;
 
     font-size: 16px;
     font-weight: 400;
@@ -39,6 +71,17 @@ const Login = styled.p`
     font-size: 30px;
     font-weight: 400;
     line-height: 38px;
+
+    @media (max-width: 1023px) {
+        margin-top: 72px;
+    }
+
+    @media (max-width: 374px), (max-height: 767px) {
+        margin-top: 56px;
+
+        font-size: 20px;
+        line-height: 24px;
+    }
 `;
 
 const InputContainer = styled.div`
@@ -53,6 +96,15 @@ const Icon = styled.img`
     bottom: 20px;
 
     transition: 500ms;
+
+    @media (max-width: 374px), (max-height: 767px) {
+        height: 15px;
+        bottom: 15px;
+    }
+
+    @media (max-width: 374px) {
+        right: 20px;
+    }
 `;
 
 const Input = styled.input`
@@ -70,7 +122,7 @@ const Input = styled.input`
     font-size: 16px;
     font-weight: 400;
     line-height: 20px;
-    color: ${secundaria};
+    color: ${secondary};
 
     &:not(:placeholder-shown) + ${Icon}
     // &:focus + ${Icon}
@@ -79,24 +131,33 @@ const Input = styled.input`
     }
 
     &.invalid {
-        border: 1px solid ${primaria};
+        border: 1px solid ${primary};
+    }
+
+    @media (max-height: 767px), (max-width: 374px) {
+        margin-top: 24px;
+        height: 40px;
     }
 `;
 
 const InvalidMessage = styled.p`
     margin: 28px auto 0;
 
-    width: 283px;
-    height: 40px;
+    max-width: 283px;
+    min-height: 40px;
 
     text-align: center;
     font-size: 16px;
     font-weight: 700;
     line-height: 20px;
-    color: ${primaria};
+    color: ${primary};
 
     &:not(.invalid) {
         visibility: hidden;
+    }
+
+    @media (max-height: 767px), (max-width: 374px) {
+        margin-top: 16px;
     }
 `;
 
@@ -121,6 +182,11 @@ const Button = styled.button`
 
     &:hover {
         transform: scale(1.05);
+    }
+
+    @media (max-height: 767px), (max-width: 374px) {
+        height: 48px;
+        margin-top: 25px;
     }
 `;
 
@@ -149,6 +215,7 @@ const Content = () => {
 
     return (
         <Container>
+            <StyledLogoWhite />
             <Ola>Olá,</Ola>
             <Text>Para continuar navegando de forma segura, efetue o login na rede.</Text>
             <Login>Login</Login>

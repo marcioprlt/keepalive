@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import image from "../../../assets/images/laptop.png";
-import logo from "../../../assets/images/logoWhite.png";
+import LogoWhite from "../../../components/LogoWhite";
 
 const Background = styled.div`
     width: 50vw;
@@ -10,22 +10,27 @@ const Background = styled.div`
     background-position: right center;
 
     position: relative;
+
+    @media (max-width: 767px) {
+        display: none;
+    }
 `;
 
-const Logo = styled.div`
-    width: 306px;
-    height: 69px;
-    background-image: url(${logo});
-
+const StyledLogoWhite = styled(LogoWhite)`
     position: absolute;
     top: 35px;
-    right: calc(25vw - 153px);
+    right: calc(50% - 153px);
+
+    @media (max-width: 1023px) {
+        width: 192px;
+        right: calc(50% - 96px);
+    }
 `;
 
 const Image = () => {
     return (
         <Background>
-            <Logo />
+            <StyledLogoWhite />
         </Background>
     )
 }

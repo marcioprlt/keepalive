@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import weatherIcon from "../../../assets/images/weatherIcon.svg";
 import chave from "../../../chaveAPI";
 
 const WeatherContainer = styled.div`
-    width 121px;
+    width: 121px;
     position: absolute;
     top: 25px;
     right: 41px;
@@ -85,7 +85,9 @@ const Weather = () => {
     const [city, setCity] = useState("");
     const [temperature, setTemperature] = useState(0);
 
-    getWeather({setCity, setTemperature});
+    useEffect(() => {
+        getWeather({setCity, setTemperature});
+    }, []); 
 
     return (
         <WeatherContainer>
