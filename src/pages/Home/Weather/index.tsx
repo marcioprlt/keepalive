@@ -9,6 +9,16 @@ const WeatherContainer = styled.div`
     position: absolute;
     top: 25px;
     right: 41px;
+
+    @media (max-width: 1023px) {
+        width: 96px;
+        right: 28px;
+    }
+
+    @media (max-width: 374px), (max-height: 599px),
+    ((max-width: 767px) and (max-height: 767px)) {
+        display: none;
+    }
 `;
 
 const City = styled.div`
@@ -28,6 +38,11 @@ const Temperature = styled.div`
     font-size: 48px;
     font-weight: 700;
     line-height: 60px;
+
+    @media (max-width: 1023px) {
+        font-size: 32px;
+        line-height: 48px;
+    }
 `;
 
 interface GetWeatherParams {

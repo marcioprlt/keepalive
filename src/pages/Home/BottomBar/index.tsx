@@ -12,12 +12,18 @@ const BarContainer = styled.div`
 
     background: linear-gradient(90.16deg, #33383D 0%, #1C1D20 100%);
 
-    position: absolute;
-    bottom: 0px;
+    @media (max-width: 1023px) {
+        height: 75px;
+    }
+
+    @media (max-width: 767px) {
+        flex-direction: column;
+        height: initial;
+    }
 `;
 
 const TextSmall = styled.div`
-    width: 548px;
+    max-width: 548px;
     margin-left: 32px;
 
     font-size: 12px;
@@ -25,6 +31,17 @@ const TextSmall = styled.div`
     line-height: 15px;
     text-align: right;
     color: white;
+
+    @media (max-width: 1023px) {
+        margin-left: 24px;
+    }
+
+    @media (max-width: 767px) {
+        margin: 0 24px;
+        padding-top: 24px;
+
+        text-align: center;
+    }
 `;
 
 const Line = styled.div`
@@ -34,15 +51,73 @@ const Line = styled.div`
     margin: 0px 35px;
 
     border-right: 1px solid white;
+
+    @media (max-width: 1023px) {
+        margin: 0px 20px;
+    }
+
+    @media (max-width: 767px) {
+        margin: 20px 0px;
+        width: 90%;
+        height: 1px;
+
+        border-bottom: 1px solid white;
+    }
+`;
+
+const SecondLine = styled(Line)`
+    display: none;
+
+    @media (max-width: 374px) {
+        width: 100%;
+        display: initial;
+    }
+`;
+
+const CountdownAndBoxes = styled.div`
+    height: 100%;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    @media (max-width: 767px) {
+        width: 90%;
+        height: 125px;
+    }
+
+    @media (max-width: 374px) {
+        flex-direction: column;
+    }
 `;
 
 const CountdownContainer = styled.div`
-    margin: 0 19vw 0 4.6vw;
+    margin: 0 369px 0 88px;
     width: 239px;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @media (max-width: 1439px) {
+        margin: 0 100px 0 48px;
+    }
+
+    @media (max-width: 1023px) {
+        margin: 0 5% 0 3%;
+        width: 200px;
+        gap: 24px;
+    }
+
+    @media (max-width: 767px) {
+
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    @media (max-width: 374px) {
+        flex-direction: row;
+    }
 `;
 
 const TextMedium = styled.div`
@@ -53,6 +128,21 @@ const TextMedium = styled.div`
     line-height: 18px;
     text-align: right;
     color: white;
+
+    @media (max-width: 1023px) {
+        width: 75px;
+    }
+
+    @media (max-width: 767px) {
+        width: initial;
+        max-width: 175px;
+        text-align: center;
+    }
+
+    @media (max-width: 374px) {
+        width: 75px;
+        text-align: right;
+    }
 `;
 
 const TextBig = styled.div`
@@ -61,6 +151,11 @@ const TextBig = styled.div`
     line-height: 40px;
     text-align: center;
     color: white;
+
+    @media (max-width: 1023px) {
+        font-size: 32px;
+        line-height: 24px;
+    }
 `;
 
 const SecondsText = styled(TextMedium)`
@@ -70,6 +165,15 @@ const SecondsText = styled(TextMedium)`
 interface BoxProps {
     white?: any
 }
+
+const LinkBoxes = styled.div`
+    height: 100%;
+    display: flex;
+
+    @media (max-width: 374px) {
+        margin-bottom: 16px;
+    }
+`;
 
 const LinkBox = styled.div<BoxProps>`
     width: 131px;
@@ -90,6 +194,16 @@ const LinkBox = styled.div<BoxProps>`
     &>a{
         color: ${props => props.white ? "#C13216" : "white" };
         cursor: pointer;
+    }
+
+    @media (max-width: 1023px) {
+        width: 100px;
+    }
+
+    @media (max-width: 767px) {
+        max-width: 131px;
+
+        background-color: transparent;
     }
 `;
 
@@ -116,19 +230,25 @@ const BottomBar = () => {
                 Essa janela do navegador é usada para manter sua sessão de autenticação ativa. Deixe-a aberta em segundo plano e abra uma nova janela para continuar a navegar.
             </TextSmall>
             <Line />
-            <CountdownContainer>
-                <TextMedium>Application refresh in</TextMedium>
-                <div>
-                    <TextBig>{seconds}</TextBig>
-                    <SecondsText>seconds</SecondsText>
-                </div>
-            </CountdownContainer>
-            <LinkBox white>
-                <a href="http://google.com" target="_blank">Continuar Navegando</a>
-            </LinkBox>
-            <LinkBox>
-                <a onClick={() => logout()}>Logout</a>
-            </LinkBox>
+                <CountdownAndBoxes>
+                    <CountdownContainer>
+                        <TextMedium>Application refresh in</TextMedium>
+                        <div>
+                            <TextBig>{seconds}</TextBig>
+                            <SecondsText>seconds</SecondsText>
+                        </div>
+                    </CountdownContainer>
+                    <SecondLine />
+                    <LinkBoxes>
+                        <LinkBox white>
+                            <a href="http://google.com" target="_blank">Continuar Navegando</a>
+                        </LinkBox>
+                        <LinkBox>
+                            <a onClick={() => logout()}>Logout</a>
+                        </LinkBox>
+                    </LinkBoxes>
+                </CountdownAndBoxes>
+            
         </BarContainer>
     )
 }

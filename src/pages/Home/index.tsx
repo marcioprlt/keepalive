@@ -16,15 +16,45 @@ const Container = styled.div`
     background: url(${ball});
     background-repeat: no-repeat;
     background-position: left bottom 24px;
-    background-size: 30%;
+    background-size: 52vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
     position: relative;
+
+    @media (max-width: 1439px) {
+        background-size: 45vh;
+    }
+
+    @media (max-width: 1023px) {
+        background-size: 35vh;
+    }
+
+    @media (max-width: 767px) {
+        background: none;
+        justify-content: end;
+    }
+
+    @media (max-width: 767px) and (max-height: 599px) {
+        height: 100%;
+    }
+    
+
+    @media (max-width: 374px) and (max-height: 767px) {
+        height: 100%;
+    }
 `;
 
 const Logo = styled.img`
     position: absolute;
     top: 25px;
     left: 40px;
+
+    @media (max-width: 767px) {
+        left: 28px;
+    }
 `;
 
 const Temperature = styled.img`

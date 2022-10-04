@@ -7,11 +7,25 @@ const Time = styled.div`
     margin: 0 auto;
     padding-top: 32px;
 
-    font-size: 13vh;
+    font-size: 144px;
     font-weight: 700;
-    line-height: 11vh;
+    line-height: 100px;
     text-align: center;
     color: #222222;
+
+    @media (max-width: 1439px), (max-height: 767px) {
+        font-size: 100px;
+        line-height: 72px;
+    }
+
+    @media (max-width: 1023px) {
+        font-size: 72px;
+        line-height: 50px;
+    }
+
+    @media (max-width: 767px) {
+        display: none;
+    }
 `;
 
 const DateLine = styled.div`
@@ -23,6 +37,10 @@ const DateLine = styled.div`
     line-height: 18px;
     text-align: center;
     color: #222222;
+
+    @media (max-width: 767px) {
+        display: none;
+    }
 `;
 
 const Days = [
