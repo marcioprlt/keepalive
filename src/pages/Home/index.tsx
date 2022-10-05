@@ -11,12 +11,12 @@ import MainText from "./MainText";
 
 const Container = styled.div`
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
 
     background: url(${ball});
     background-repeat: no-repeat;
     background-position: left bottom 24px;
-    background-size: 52vh;
+    background-size: 52vmin;
 
     display: flex;
     flex-direction: column;
@@ -25,25 +25,15 @@ const Container = styled.div`
     position: relative;
 
     @media (max-width: 1439px) {
-        background-size: 45vh;
+        background-size: 45vmin;
     }
 
     @media (max-width: 1023px) {
-        background-size: 35vh;
+        background-size: 35vmin;
     }
 
     @media (max-width: 767px) {
         background: none;
-        justify-content: end;
-    }
-
-    @media (max-width: 767px) and (max-height: 599px) {
-        height: 100%;
-    }
-    
-
-    @media (max-width: 374px) and (max-height: 767px) {
-        height: 100%;
     }
 `;
 
@@ -55,12 +45,11 @@ const Logo = styled.img`
     @media (max-width: 767px) {
         left: 28px;
     }
-`;
 
-const Temperature = styled.img`
-    position: absolute;
-    top: 25px;
-    right: 40px;
+    @media (max-width: 374px) {
+        width: 100px;
+        left: 16px;
+    }
 `;
 
 export default function Home() {

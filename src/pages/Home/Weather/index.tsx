@@ -2,22 +2,21 @@ import styled from "styled-components";
 import React, { useEffect, useState } from "react";
 
 import weatherIcon from "../../../assets/images/weatherIcon.svg";
-import chave from "../../../chaveAPI";
+import chave from "../../../chaveAPIdummy";
 
 const WeatherContainer = styled.div`
-    width: 121px;
+    width: 125px;
     position: absolute;
     top: 25px;
     right: 41px;
 
     @media (max-width: 1023px) {
-        width: 96px;
         right: 28px;
     }
 
-    @media (max-width: 374px), (max-height: 599px),
-    ((max-width: 767px) and (max-height: 767px)) {
-        display: none;
+    @media (max-width: 374px) {
+        right: 16px;
+        width: 64px;
     }
 `;
 
@@ -26,12 +25,27 @@ const City = styled.div`
     font-weight: 400;
     line-height: 18px;
     text-align: center;
+
+    @media (max-width: 374px) {
+        display: none;
+    }
 `;
 
 const IconTempContainer = styled.div`
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
+
+    @media (max-width: 374px) {
+        flex-direction: column;
+        align-items: end;
+    }
+`;
+
+const WeatherIcon = styled.img`
+    @media (max-width: 374px) {
+        width: 24px;
+    }
 `;
 
 const Temperature = styled.div`
@@ -43,6 +57,11 @@ const Temperature = styled.div`
         font-size: 32px;
         line-height: 48px;
     }
+
+    @media (max-width: 374px) {
+        font-size: 24px;
+        line-height: 32px;
+    }
 `;
 
 interface GetWeatherParams {
@@ -51,6 +70,9 @@ interface GetWeatherParams {
 }
 
 function getWeather({setCity, setTemperature}: GetWeatherParams) {
+    //if chave is 0 don't call API
+    if (chave == 0) return;
+
     navigator.geolocation.getCurrentPosition(
         (pos) => {
             let lat = pos.coords.latitude;
@@ -97,7 +119,7 @@ function getWeather({setCity, setTemperature}: GetWeatherParams) {
  }
 
 const Weather = () => {
-    const [city, setCity] = useState("");
+    const [city, setCity] = useState("unknown city with very long name");
     const [temperature, setTemperature] = useState(0);
 
     useEffect(() => {
@@ -108,7 +130,7 @@ const Weather = () => {
         <WeatherContainer>
             <City>{city}</City>
             <IconTempContainer>
-                <img src={weatherIcon} />
+                <WeatherIcon src={weatherIcon} />
                 <Temperature>{temperature}º</Temperature>
             </IconTempContainer>
         </WeatherContainer>

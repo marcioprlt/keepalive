@@ -11,6 +11,7 @@ import LogoWhite from "../../../components/LogoWhite";
 const Container = styled.div`
     width: 379px;
     margin: auto;
+    padding: 48px 0;
 
     display: flex;
     flex-direction: column;

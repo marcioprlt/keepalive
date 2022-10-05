@@ -4,6 +4,7 @@ import styled from "styled-components";
 const MainTextContainer = styled.div`
     width: 60%;
     margin-right: 134px;
+    padding: 24px 0;
 
     align-self: end;
 
@@ -14,16 +15,12 @@ const MainTextContainer = styled.div`
 
     @media (max-width: 1023px) {
         width: 60%;
-        margin-right: 64px;
+        margin-right: 48px;
     }
 
     @media (max-width: 767px) {
-        width: 90%;
-        margin: 128px auto 48px;
-    }
-
-    @media (max-width: 374px) {
-        margin: 192px auto 64px;
+        width: 85%;
+        margin: 128px auto 0;
     }
 `;
 
@@ -55,6 +52,11 @@ const Small = styled(Text)`
     color: #222222;
 
     @media (max-width: 1439px) {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    @media (max-width: 767px) {
         font-size: 16px;
         line-height: 20px;
     }
@@ -66,14 +68,19 @@ const RedBig = styled(Text)`
     line-height: 4.2vw; //8vh;
     color: #C12D18;
 
-    @media (max-width: 1439px), (max-height: 767px) {
-        font-size: 38px;
-        line-height: 40px;
+    @media (max-width: 1439px) {
+        font-size: 48px;
+        line-height: 64px;
     }
 
-    @media (max-width: 767px), (max-height: 599px) {
-        font-size: 24px;
-        line-height: 32px;
+    @media (max-width: 767px), (max-height: 767px) {
+        font-size: 40px;
+        line-height: 48px;
+    }
+
+    @media (max-width: 374px) {
+        font-size: 32px;
+        line-height: 40px;
     }
 `;
 

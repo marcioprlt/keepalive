@@ -83,7 +83,6 @@ const CountdownAndBoxes = styled.div`
 
     @media (max-width: 767px) {
         width: 90%;
-        height: 125px;
     }
 
     @media (max-width: 374px) {
@@ -110,12 +109,13 @@ const CountdownContainer = styled.div`
     }
 
     @media (max-width: 767px) {
-
+        margin-bottom: 20px;
         flex-direction: column;
         gap: 16px;
     }
 
     @media (max-width: 374px) {
+        margin-bottom: initial;
         flex-direction: row;
     }
 `;
@@ -162,18 +162,23 @@ const SecondsText = styled(TextMedium)`
     text-align: center;
 `;
 
-interface BoxProps {
-    white?: any
-}
-
 const LinkBoxes = styled.div`
     height: 100%;
     display: flex;
-
-    @media (max-width: 374px) {
-        margin-bottom: 16px;
+    
+    @media (max-width: 767px) {
+        height: 105px;
+        margin-bottom: 20px;
     }
-`;
+    
+    @media (max-width: 374px) {
+        height: 75px;
+    }
+    `;
+
+interface BoxProps {
+    white?: any
+}
 
 const LinkBox = styled.div<BoxProps>`
     width: 131px;
@@ -198,12 +203,6 @@ const LinkBox = styled.div<BoxProps>`
 
     @media (max-width: 1023px) {
         width: 100px;
-    }
-
-    @media (max-width: 767px) {
-        max-width: 131px;
-
-        background-color: transparent;
     }
 `;
 
@@ -230,25 +229,24 @@ const BottomBar = () => {
                 Essa janela do navegador é usada para manter sua sessão de autenticação ativa. Deixe-a aberta em segundo plano e abra uma nova janela para continuar a navegar.
             </TextSmall>
             <Line />
-                <CountdownAndBoxes>
-                    <CountdownContainer>
-                        <TextMedium>Application refresh in</TextMedium>
-                        <div>
-                            <TextBig>{seconds}</TextBig>
-                            <SecondsText>seconds</SecondsText>
-                        </div>
-                    </CountdownContainer>
-                    <SecondLine />
-                    <LinkBoxes>
-                        <LinkBox white>
-                            <a href="http://google.com" target="_blank">Continuar Navegando</a>
-                        </LinkBox>
-                        <LinkBox>
-                            <a onClick={() => logout()}>Logout</a>
-                        </LinkBox>
-                    </LinkBoxes>
-                </CountdownAndBoxes>
-            
+            <CountdownAndBoxes>
+                <CountdownContainer>
+                    <TextMedium>Application refresh in</TextMedium>
+                    <div>
+                        <TextBig>{seconds}</TextBig>
+                        <SecondsText>seconds</SecondsText>
+                    </div>
+                </CountdownContainer>
+                <SecondLine />
+                <LinkBoxes>
+                    <LinkBox white>
+                        <a href="http://google.com" target="_blank">Continuar Navegando</a>
+                    </LinkBox>
+                    <LinkBox>
+                        <a onClick={() => logout()}>Logout</a>
+                    </LinkBox>
+                </LinkBoxes>
+            </CountdownAndBoxes>
         </BarContainer>
     )
 }

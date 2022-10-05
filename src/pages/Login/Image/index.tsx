@@ -4,7 +4,7 @@ import LogoWhite from "../../../components/LogoWhite";
 
 const Background = styled.div`
     width: 50vw;
-    height: 100vh;
+    height: auto;
     background-image: url(${image});
     background-size: cover;
     background-position: right center;

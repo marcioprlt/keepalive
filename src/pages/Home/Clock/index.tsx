@@ -13,7 +13,7 @@ const Time = styled.div`
     text-align: center;
     color: #222222;
 
-    @media (max-width: 1439px), (max-height: 767px) {
+    @media (max-width: 1439px), (max-height: 899px) {
         font-size: 100px;
         line-height: 72px;
     }
