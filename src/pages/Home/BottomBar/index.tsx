@@ -65,15 +65,6 @@ const Line = styled.div`
     }
 `;
 
-const SecondLine = styled(Line)`
-    display: none;
-
-    @media (max-width: 374px) {
-        width: 100%;
-        display: initial;
-    }
-`;
-
 const CountdownAndBoxes = styled.div`
     height: 100%;
 
@@ -86,6 +77,7 @@ const CountdownAndBoxes = styled.div`
     }
 
     @media (max-width: 374px) {
+        width: 100%;
         flex-direction: column;
     }
 `;
@@ -172,7 +164,9 @@ const LinkBoxes = styled.div`
     }
     
     @media (max-width: 374px) {
+        width: 100%;
         height: 75px;
+        margin: 20px 0 0;
     }
     `;
 
@@ -203,6 +197,10 @@ const LinkBox = styled.div<BoxProps>`
 
     @media (max-width: 1023px) {
         width: 100px;
+    }
+
+    @media (max-width: 374px) {
+        width: 50%;
     }
 `;
 
@@ -237,7 +235,6 @@ const BottomBar = () => {
                         <SecondsText>seconds</SecondsText>
                     </div>
                 </CountdownContainer>
-                <SecondLine />
                 <LinkBoxes>
                     <LinkBox white>
                         <a href="http://google.com" target="_blank">Continuar Navegando</a>

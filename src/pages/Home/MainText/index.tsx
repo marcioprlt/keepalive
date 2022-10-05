@@ -20,7 +20,7 @@ const MainTextContainer = styled.div`
 
     @media (max-width: 767px) {
         width: 85%;
-        margin: 128px auto 0;
+        margin: 96px auto 24px;
     }
 `;
 
@@ -74,13 +74,14 @@ const RedBig = styled(Text)`
     }
 
     @media (max-width: 767px), (max-height: 767px) {
-        font-size: 40px;
-        line-height: 48px;
+        margin: 6px 0;
+        font-size: 32px;
+        line-height: 40px;
     }
 
     @media (max-width: 374px) {
-        font-size: 32px;
-        line-height: 40px;
+        font-size: 24px;
+        line-height: 32px;
     }
 `;
 

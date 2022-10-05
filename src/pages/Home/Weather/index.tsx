@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 
 import weatherIcon from "../../../assets/images/weatherIcon.svg";
 import chave from "../../../chaveAPIdummy";
+//import chave from "../../../chaveAPI";
 
 const WeatherContainer = styled.div`
     width: 125px;
@@ -71,7 +72,7 @@ interface GetWeatherParams {
 
 function getWeather({setCity, setTemperature}: GetWeatherParams) {
     //if chave is 0 don't call API
-    if (chave == 0) return;
+    if (!chave) return;
 
     navigator.geolocation.getCurrentPosition(
         (pos) => {
