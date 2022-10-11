@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import image from "../../../assets/images/laptop.png";
-import LogoWhite from "../../../components/LogoWhite";
+import image from "../../assets/images/laptop.png";
+import LogoWhite from "../LogoWhite";
 
 const Background = styled.div`
     width: 50vw;

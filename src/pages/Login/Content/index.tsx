@@ -2,34 +2,17 @@ import styled from "styled-components"
 
 import iconUser from "../../../assets/images/icon-user.svg";
 import iconPassword from "../../../assets/images/icon-password.svg";
-import { primary, secondary } from "../../../components/variables";
-import React, { useState } from "react";
+import { primary } from "../../../components/variables";
+import { useContext, useState } from "react";
 
-import { NavigateFunction, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import LogoWhite from "../../../components/LogoWhite";
-
-const Container = styled.div`
-    width: 379px;
-    margin: auto;
-    padding: 48px 0;
-
-    display: flex;
-    flex-direction: column;
-
-    color: ${secondary};
-
-    @media (max-width: 1023px) {
-        width: 30%;
-    }
-
-    @media (max-width: 767px) {
-        width: 60%;
-    }
-
-    @media (max-width: 374px) {
-        width: 80%;
-    }
-`;
+import Button from "../../../components/Button";
+import Input from "../../../components/Input";
+import Container from "../../../components/LoginContainer";
+import ClickHere from "../../../components/ClickHere";
+import { tryLogin } from "../../../firebase";
+import { UserContext } from "../../../common/context/User";
 
 const StyledLogoWhite = styled(LogoWhite)`
     display: none;
@@ -67,7 +50,7 @@ const Text = styled.p`
 `;
 
 const Login = styled.p`
-    margin-top: 135px;
+    margin-top: 100px;
 
     font-size: 30px;
     font-weight: 400;
@@ -108,36 +91,12 @@ const Icon = styled.img`
     }
 `;
 
-const Input = styled.input`
-    margin-top: 32px;
-    width: 100%;
-    height: 60px;
-
-    padding: 20px;
-
-    background: none;
-    border: 1px solid white;
-    border-radius: 50px;
-    outline: none;
-
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 20px;
-    color: ${secondary};
+const StyledInput = styled(Input)`
 
     &:not(:placeholder-shown) + ${Icon}
     // &:focus + ${Icon}
     {
         right: 20px;
-    }
-
-    &.invalid {
-        border: 1px solid ${primary};
-    }
-
-    @media (max-height: 767px), (max-width: 374px) {
-        margin-top: 24px;
-        height: 40px;
     }
 `;
 
@@ -162,57 +121,30 @@ const InvalidMessage = styled.p`
     }
 `;
 
-const Button = styled.button`
-    margin-top: 47px; //115px;
-    width: 100%;
-    height: 67px;
-    
-    background: linear-gradient(90deg, #FF2D04 0%, #C13216 100%);
-    border: none;
-    border-radius: 50px;
-
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 22px;
-    color: white;
-
-    box-shadow: inset 5px 5px 15px rgba(0, 0, 0, 0.15);
-    filter: drop-shadow(5px 5px 15px rgba(0, 0, 0, 0.5));
-
-    transition: 500ms;
-
-    &:hover {
-        transform: scale(1.05);
-    }
-
-    @media (max-height: 767px), (max-width: 374px) {
-        height: 48px;
-        margin-top: 25px;
-    }
-`;
-
-interface ButtonPressParams {
-    user: string,
-    password: string,
-    setInputValid: React.Dispatch<React.SetStateAction<boolean>>,
-    navigate: NavigateFunction
-}
-
-function buttonPress({user, password, setInputValid, navigate}: ButtonPressParams) {
-
-    if (user.length == 0 || password.length == 0) {
-        setInputValid(false);
-    } else {
-        setInputValid(true);
-        navigate("/home");
-    }
-}
-
 const Content = () => {
     const [user, setUser] = useState("");
     const [password, setPassword] = useState("");
     const [inputValid, setInputValid] = useState(true);
     const navigate = useNavigate();
+    const [contextName, setContextName] = useContext(UserContext);
+
+    const buttonPress = () => {
+        if (user.length == 0 || password.length == 0) {
+            setInputValid(false);
+        } else {
+            setInputValid(true);
+            tryLogin({user, password, loginAction});
+        }
+    }
+
+    const loginAction = (name: string) => {
+        if (name) {
+            setContextName(name);
+            navigate("/home");
+        } else {
+            setInputValid(false);
+        }
+    }
 
     return (
         <Container>
@@ -221,9 +153,9 @@ const Content = () => {
             <Text>Para continuar navegando de forma segura, efetue o login na rede.</Text>
             <Login>Login</Login>
             <InputContainer>
-                <Input
+                <StyledInput
                     type="text"
-                    placeholder="Usuário"
+                    placeholder="E-mail"
                     value={user}
                     onChange={(e) => setUser(e.target.value)}
                     className={inputValid ? "" : "invalid"}
@@ -231,7 +163,7 @@ const Content = () => {
                 <Icon src={iconUser} />
             </InputContainer>
             <InputContainer>
-                <Input
+                <StyledInput
                     type="password"
                     placeholder="Senha"
                     value={password}
@@ -243,9 +175,14 @@ const Content = () => {
             <InvalidMessage className={inputValid ? "" : "invalid"}>
                 Ops, usuário ou senha inválidos. Tente novamente!
             </InvalidMessage>
-            <Button onClick={() => buttonPress({ user, password, setInputValid, navigate })}>
+            <Button onClick={() => buttonPress()}>
                 Continuar
             </Button>
+            <ClickHere>
+                {"Se você não possui um cadastro  "}
+                <a onClick={() => navigate("/signup")}>clique aqui</a>
+                .
+            </ClickHere>
         </Container>
     )
 }

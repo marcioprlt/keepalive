@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { UserContext } from "../../../common/context/User";
 
 const BarContainer = styled.div`
     width: 100vw;
@@ -13,12 +14,38 @@ const BarContainer = styled.div`
     background: linear-gradient(90.16deg, #33383D 0%, #1C1D20 100%);
 
     @media (max-width: 1023px) {
-        height: 75px;
+        height: 125px;
     }
 
     @media (max-width: 767px) {
         flex-direction: column;
         height: initial;
+    }
+`;
+
+const NameBox = styled.div`
+    margin-left: 24px;
+    padding: 12px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @media (max-width: 767px) {
+        margin-left: 0;
+    }
+`;
+
+const Name = styled.div`
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 32px;
+    text-align: center;
+    color: white;
+
+    @media (max-width: 1023px) {
+        font-size: 16px;
+        line-height: 32px;
     }
 `;
 
@@ -91,11 +118,10 @@ const CountdownContainer = styled.div`
     align-items: center;
 
     @media (max-width: 1439px) {
-        margin: 0 100px 0 48px;
+        margin: 0 5% 0 3%;
     }
 
     @media (max-width: 1023px) {
-        margin: 0 5% 0 3%;
         width: 200px;
         gap: 24px;
     }
@@ -208,6 +234,8 @@ const BottomBar = () => {
 
     const [seconds, setSeconds] = useState<number>(60);
     const navigate = useNavigate();
+
+    const [name, setName] = useContext(UserContext);
     
     useEffect(() => {
         if (seconds == 0) {
@@ -218,11 +246,16 @@ const BottomBar = () => {
     }, [seconds]);
 
     function logout() {
+        setName("");
         navigate("/login");
     }
     
     return (
         <BarContainer>
+            <NameBox>
+                <SecondsText>Seja <br /> bem-vindo</SecondsText>  
+                <Name>{name.split(" ")[0]}</Name>
+            </NameBox>
             <TextSmall>
                 Essa janela do navegador é usada para manter sua sessão de autenticação ativa. Deixe-a aberta em segundo plano e abra uma nova janela para continuar a navegar.
             </TextSmall>
@@ -240,7 +273,7 @@ const BottomBar = () => {
                         <a href="http://google.com" target="_blank">Continuar Navegando</a>
                     </LinkBox>
                     <LinkBox>
-                        <a onClick={() => logout()}>Logout</a>
+                        <a onClick={logout}>Logout</a>
                     </LinkBox>
                 </LinkBoxes>
             </CountdownAndBoxes>

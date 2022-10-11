@@ -11,7 +11,7 @@ const SplitContainer = styled.div`
 `;
 
 
-export default function Login() {
+export default function SignUp() {
     return (
         <>
             <GlobalStyle />
